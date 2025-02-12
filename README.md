@@ -55,6 +55,7 @@
   - Enable port :80 of your instance to use public ip
 
 - Backend
+
   - updated DB password
   - allowed EC2 instance public IP on mongoDB
   - installed pm2 `npm install pm2 -g`
@@ -62,6 +63,7 @@
   - pm2 logs helps to
   - pm2 list,pm2 flush <name>, pm2 delete <name>, pm2 stop <name>
   - to give custom name to pm2 `pm2 start npm --name "devTinderBackend" -- start`
+  - config nginx - `sudo nano /etc/nginx/sites-available/default`
   - to restart nginx `sudo systemctl restart nginx`
   - modify BASE_URL in front end project to "/api"
 
