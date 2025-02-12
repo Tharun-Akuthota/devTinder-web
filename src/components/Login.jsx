@@ -28,7 +28,7 @@ const Login = () => {
       );
 
       dispatch(addUser(res.data)); // dispatching an action to update the state variable
-      navigate("/"); // redirecting to the home page
+      return navigate("/"); // redirecting to the home page
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
     }

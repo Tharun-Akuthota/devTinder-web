@@ -42,6 +42,7 @@
 - connect with ssh to terminal
 - install node version
 - add repos to the instance using git clone
+
 - Fronend
 
   - install dependecies
@@ -61,6 +62,8 @@
   - pm2 logs helps to
   - pm2 list,pm2 flush <name>, pm2 delete <name>, pm2 stop <name>
   - to give custom name to pm2 `pm2 start npm --name "devTinderBackend" -- start`
+  - to restart nginx `sudo systemctl restart nginx`
+  - modify BASE_URL in front end project to "/api"
 
 # nginx config
 

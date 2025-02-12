@@ -34,12 +34,14 @@ const Body = () => {
   }, []); // this will run only once when the component is first rendered
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <NavBar />
-      <Outlet />{" "}
-      {/*Any children of the Body component will be rendered here, outlet helps to render nested routes */}
+      <main className="flex-grow">
+        <Outlet />{" "}
+        {/*Any children of the Body component will be rendered here, outlet helps to render nested routes */}
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
