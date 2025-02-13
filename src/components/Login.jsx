@@ -107,6 +107,7 @@ const Login = () => {
             </div>
             <input
               type="password"
+              name="password"
               placeholder="Type here"
               value={password}
               className="bg-white input input-bordered w-full max-w-xs"

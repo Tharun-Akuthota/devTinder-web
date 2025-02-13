@@ -66,6 +66,8 @@
   - config nginx - `sudo nano /etc/nginx/sites-available/default`
   - to restart nginx `sudo systemctl restart nginx`
   - modify BASE_URL in front end project to "/api"
+  - do git pull everytime made changes from local to server
+  - and build it again, copy to nginx
 
 # nginx config
 
@@ -89,3 +91,14 @@
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
+
+# Domain
+
+- buy domain from godaddy
+- DNS, registrar, cloudflare, change nameservers to cloudflare
+- DNS record point A to instance IP
+- Enable SSL/TLS- flexible for website
+
+# Send email to User
+
+- Amazon SES - simple email service
