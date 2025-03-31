@@ -40,6 +40,7 @@
 
 - instance with ubuntu, t2.micro
 - connect with ssh to terminal
+- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 - install node version
 - add repos to the instance using git clone
 
@@ -67,7 +68,10 @@
   - to restart nginx `sudo systemctl restart nginx`
   - modify BASE_URL in front end project to "/api"
   - do git pull everytime made changes from local to server
-  - and build it again, copy to nginx
+  - and build it again, copy to nginx/
+  - add AWS IP to mongoDB
+
+- add dotenv file to server `sudo nano .env`
 
 # nginx config
 
@@ -102,3 +106,7 @@
 # Send email to User
 
 - Amazon SES - simple email service
+
+# Build chat using websockets(socket.io)
+
+- low latency, bidirectional and event based
