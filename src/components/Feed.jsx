@@ -36,14 +36,6 @@ const Feed = () => {
         <UserCard user={feed[0]} />
       </div>
     )
-
-    // <div className="flex justify-center my-10">
-    //   {feed && feed.length > 0 ? (
-    //     <UserCard user={feed[0]} />
-    //   ) : (
-    //     <p>No users to show</p>
-    //   )}
-    // </div>
   );
 };
 

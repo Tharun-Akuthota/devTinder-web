@@ -109,4 +109,6 @@
 
 # Build chat using websockets(socket.io)
 
+- Auth for socket.io
+
 - low latency, bidirectional and event based

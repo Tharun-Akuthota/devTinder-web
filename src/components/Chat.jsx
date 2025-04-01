@@ -22,7 +22,7 @@ const Chat = () => {
 
     socket.on("messageReceived", ({ firstName, text }) => {
       console.log(firstName + "Message received: ", text);
-      setMessages([...messages, { firstName, text }]);
+      setMessages((messages) => [...messages, { firstName, text }]);
     });
 
     // cleanup function to disconnect the socket when the component unmounts
