@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import BASE_URL from "../utils/constants";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -10,6 +12,27 @@ const Chat = () => {
   const user = useSelector((store) => store.user);
 
   const userId = user?._id;
+
+  const fetchChatMessages = async () => {
+    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+      withCredentials: true,
+    });
+
+    const chatMessages = chat?.data?.messages.map((msg) => {
+      const { senderId, text } = msg;
+      return {
+        firstName: senderId?.firstName,
+        lastName: senderId?.lastName,
+        text: text,
+      };
+    });
+    setMessages(chatMessages);
+    console.log(chat?.data?.messages);
+  };
+
+  useEffect(() => {
+    fetchChatMessages();
+  }, []);
 
   useEffect(() => {
     if (!userId) {
@@ -20,9 +43,9 @@ const Chat = () => {
     // As soon as page loaded, the socket connection is made and joinChat event is emitted
     socket.emit("joinChat", { userId, targetUserId });
 
-    socket.on("messageReceived", ({ firstName, text }) => {
+    socket.on("messageReceived", ({ firstName, lastName, text }) => {
       console.log(firstName + "Message received: ", text);
-      setMessages((messages) => [...messages, { firstName, text }]);
+      setMessages((messages) => [...messages, { firstName, lastName, text }]);
     });
 
     // cleanup function to disconnect the socket when the component unmounts
@@ -35,6 +58,7 @@ const Chat = () => {
     const socket = createSocketConnection();
     socket.emit("sendMessage", {
       firstName: user.firstName,
+      lastName: user.lastName,
       text: newMessage,
       userId,
       targetUserId,
@@ -48,9 +72,14 @@ const Chat = () => {
       <div className="flex-1 overflow-scroll p-5">
         {messages.map((msg, index) => {
           return (
-            <div key={index} className="chat chat-start">
+            <div
+              key={index}
+              className={
+                "chat " + (msg.senderId === userId ? "chat-end" : "chat-start")
+              }
+            >
               <div className="chat-header">
-                {msg.firstName}
+                {`${msg.firstName}  ${msg.lastName}`}
                 <time className="text-xs opacity-50"> 2 hours ago</time>
               </div>
               <div className="chat-bubble">{msg.text}</div>

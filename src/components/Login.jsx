@@ -1,5 +1,5 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -74,6 +74,7 @@ const Login = () => {
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </label>
+
               <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text text-black">Last Name</span>
@@ -88,6 +89,7 @@ const Login = () => {
               </label>
             </>
           )}
+
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text text-black">Email Id</span>
