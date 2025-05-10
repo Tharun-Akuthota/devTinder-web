@@ -14,9 +14,9 @@ import Chat from "./components/Chat";
 
 function App() {
   return (
-    <Provider store={appStore}>
-      <BrowserRouter basename="/">
-        <>
+    <>
+      <Provider store={appStore}>
+        <BrowserRouter basename="/">
           <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<LoginFooter />} />
@@ -28,16 +28,16 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/connections" element={<Connections />} />
                 <Route path="/requests" element={<Requests />} />
-                <Route path="/chat/:toUserId" element={<Chat />} />
+                <Route path="/chat/:targetUserId" element={<Chat />} />
               </Route>
             </Route>
 
             {/* Handle Unknown Routes */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
-        </>
-      </BrowserRouter>
-    </Provider>
+        </BrowserRouter>
+      </Provider>
+    </>
   );
 }
 

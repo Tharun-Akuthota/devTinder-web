@@ -37,11 +37,6 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  console.log(requests);
-
-  // if (!requests || requests.length === 0) {
-  //   return <h2>No requests</h2>;
-  // }
   if (!requests) return;
 
   if (requests.length === 0)

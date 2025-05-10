@@ -2,8 +2,7 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import BASE_URL from "../utils/constants";
-import { Outlet } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useEffect } from "react";
@@ -22,7 +21,7 @@ const Body = () => {
 
       dispatch(addUser(res.data)); // here we are adding the user to the redux store so that we can access it even if we navigate to a different page
     } catch (err) {
-      if (err.response.status === 401) {
+      if (err.response && err.response.status === 401) {
         navigate("/login"); // if the user is not logged in then we will navigate to the login page
       }
       console.error(err);
@@ -37,7 +36,7 @@ const Body = () => {
     <div className="flex flex-col h-screen">
       <NavBar />
       <main className="flex-grow">
-        <Outlet />{" "}
+        <Outlet />
         {/*Any children of the Body component will be rendered here, outlet helps to render nested routes */}
       </main>
       <Footer />

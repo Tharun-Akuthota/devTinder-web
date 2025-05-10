@@ -42,9 +42,6 @@ const Login = () => {
         { withCredentials: true }
       );
 
-      console.log(res.data);
-      console.log(res.data.data);
-
       dispatch(addUser(res?.data?.data));
       return navigate("/profile");
     } catch (err) {
@@ -56,9 +53,9 @@ const Login = () => {
     <div className="flex justify-center items-center h-screen">
       <div className="card bg-gray-300 text-primary-content w-96">
         <div className="card-body">
-          <h2 className="card-title bold text-black justify-center">
-            {isLoginForm ? "Login" : "Sign Up"}
-          </h2>
+          <h1 className="card-title bold text-black text-2xl justify-center">
+            {isLoginForm ? "Log In" : "Sign Up"}
+          </h1>
 
           {!isLoginForm && (
             <>
@@ -129,7 +126,7 @@ const Login = () => {
 
           <p
             className="text-center mt-4 cursor-pointer"
-            onClick={() => setIsLoginForm(!isLoginForm)}
+            onClick={() => setIsLoginForm((value) => !value)}
           >
             {isLoginForm
               ? "New User? SignUp Here"

@@ -8,12 +8,12 @@ import { addUser } from "../utils/userSlice";
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [photoUrl, setPhotUrl] = useState(user.photoUrl);
+  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
-  const [skills, setSkills] = useState(user.skills | []);
-  const [error, setError] = useState("Something went wrong");
+  const [skills, setSkills] = useState(user.skills || []);
+  const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
 
   const dispatch = useDispatch();
@@ -38,7 +38,9 @@ const EditProfile = ({ user }) => {
       }, 3000);
     } catch (err) {
       console.error("PATCH REQUEST FAILED", err.response?.data || err.message);
-      setError(err.message);
+      setError(
+        err.response?.data?.message || err.message || "Something went wrong"
+      );
     }
   };
 
@@ -61,6 +63,7 @@ const EditProfile = ({ user }) => {
                   value={firstName}
                   className="bg-white input input-bordered w-full max-w-xs"
                   onChange={(e) => setFirstName(e.target.value)} // binding the state variable to the UI and updating the state variable
+                  required
                 />
               </label>
 
@@ -86,7 +89,7 @@ const EditProfile = ({ user }) => {
                   placeholder="Type here"
                   value={photoUrl}
                   className="bg-white input input-bordered w-full max-w-xs"
-                  onChange={(e) => setPhotUrl(e.target.value)}
+                  onChange={(e) => setPhotoUrl(e.target.value)}
                 />
               </label>
 
@@ -100,10 +103,11 @@ const EditProfile = ({ user }) => {
                   value={age}
                   className="bg-white input input-bordered w-full max-w-xs"
                   onChange={(e) => setAge(e.target.value)}
+                  required
                 />
               </label>
 
-              <label className="form-control w-full max-w-xs">
+              {/* <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text text-black">Gender</span>
                 </div>
@@ -114,6 +118,23 @@ const EditProfile = ({ user }) => {
                   className="bg-white input input-bordered w-full max-w-xs"
                   onChange={(e) => setGender(e.target.value)}
                 />
+              </label> */}
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text text-black">Gender</span>
+                </div>
+                <select
+                  className="bg-white select select-bordered w-full max-w-xs"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Select gender
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
               </label>
 
               <label className="form-control w-full max-w-xs">
@@ -136,11 +157,23 @@ const EditProfile = ({ user }) => {
                 <input
                   type="text"
                   placeholder="Type here"
-                  value={skills}
+                  value={Array.isArray(skills) ? skills.join(", ") : skills}
                   className="bg-white input input-bordered w-full max-w-xs"
-                  onChange={(e) => setSkills(e.target.value)}
+                  onChange={(e) =>
+                    setSkills(
+                      e.target.value.split(",").map((skill) => skill.trim())
+                    )
+                  }
                 />
               </label>
+
+              {error && (
+                <div className="alert alert-error shadow-lg mt-4">
+                  <div>
+                    <span>{error}</span>
+                  </div>
+                </div>
+              )}
 
               <div className="card-actions justify-end">
                 <button
