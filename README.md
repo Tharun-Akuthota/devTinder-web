@@ -38,10 +38,11 @@
 
 - AWS account and EC2
 
-- instance with ubuntu, t2.micro
+- instance with ubuntu, t2.micro, create a key .pem file
 - connect with ssh to terminal
-- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-- install node version
+  - chmod 400 "devTinder.pem"
+- Install node to ssh using -> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+- install node version -> nvm install <version>
 - add repos to the instance using git clone
 
 - Fronend
@@ -57,7 +58,6 @@
 
 - Backend
 
-  - updated DB password
   - allowed EC2 instance public IP on mongoDB
   - installed pm2 `npm install pm2 -g`
   - to start server 24/7 use `pm2 start npm -- start`
@@ -83,18 +83,18 @@
     Frontend = devtinder.com
     Backend = devtinder.com:7777 => devtinder.com/api
 
-    nginx config :
+      nginx config :
 
-    server_name 43.204.96.49;
+      server_name 43.204.96.49;
 
-    location /api/ {
-        proxy_pass http://localhost:7777/;  # Pass the request to the Node.js app
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
+      location /api/ {
+          proxy_pass http://localhost:7777/;  # Pass the request to the Node.js app
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+      }
 
 # Domain
 

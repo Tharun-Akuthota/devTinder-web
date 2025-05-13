@@ -22,22 +22,20 @@ const Body = () => {
       dispatch(addUser(res.data)); // here we are adding the user to the redux store so that we can access it even if we navigate to a different page
     } catch (err) {
       if (err.response && err.response.status === 401) {
-        navigate("/login"); // if the user is not logged in then we will navigate to the login page
+        navigate("/login");
       }
-      console.error(err);
     }
   };
 
   useEffect(() => {
-    fetchUser(); // here fetch user will make a request to the server to get the user details
-  }, []); // this will run only once when the component is first rendered
+    fetchUser();
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
       <main className="flex-grow">
         <Outlet />
-        {/*Any children of the Body component will be rendered here, outlet helps to render nested routes */}
       </main>
       <Footer />
     </div>

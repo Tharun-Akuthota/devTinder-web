@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
 
 const Requests = () => {
-  const requests = useSelector((store) => store.requests); // getting data from the store
+  const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
 
   const reviewRequest = async (status, _id) => {
@@ -15,7 +15,7 @@ const Requests = () => {
         {},
         { withCredentials: true }
       );
-      dispatch(removeRequest(_id)); // dispatching the action to remove the data from the store
+      dispatch(removeRequest(_id));
     } catch (err) {
       console.error(err.response?.data || err.message);
     }

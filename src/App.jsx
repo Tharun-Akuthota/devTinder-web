@@ -1,8 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import appStore from "./utils/appStore";
-import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
-
+import PrivateRoute from "./components/PrivateRoute";
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Feed from "./components/Feed";
@@ -18,10 +17,8 @@ function App() {
       <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
-            {/* Public Routes */}
             <Route path="/login" element={<LoginFooter />} />
 
-            {/* Protected Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<Body />}>
                 <Route path="/" element={<Feed />} />
@@ -32,7 +29,6 @@ function App() {
               </Route>
             </Route>
 
-            {/* Handle Unknown Routes */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </BrowserRouter>

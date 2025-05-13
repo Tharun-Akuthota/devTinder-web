@@ -106,19 +106,6 @@ const EditProfile = ({ user }) => {
                   required
                 />
               </label>
-
-              {/* <label className="form-control w-full max-w-xs">
-                <div className="label">
-                  <span className="label-text text-black">Gender</span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  value={gender}
-                  className="bg-white input input-bordered w-full max-w-xs"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-              </label> */}
               <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text text-black">Gender</span>

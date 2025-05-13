@@ -26,7 +26,7 @@ const UserCard = ({ user }) => {
   return (
     <div className="card bg-base-300 w-96 shadow-xl my-10 ">
       <figure>
-        <img src={photoUrl} alt="user photo" />
+        <img src={photoUrl} alt="user-photo" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
@@ -38,7 +38,7 @@ const UserCard = ({ user }) => {
             className="btn btn-primary"
             onClick={() => handleSendRequest("ignored", _id)}
           >
-            Ingore
+            Ignore
           </button>
           <button
             className="btn btn-secondary"

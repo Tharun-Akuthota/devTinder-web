@@ -16,19 +16,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // await axios.post("http://localhost:7777/login", { emailId, password });
-    // this request will blocked by CORS because the server is not configured to accept requests from same domain
-    // it is browser's security feature to block requests from different domain, even port is matter
-
     try {
       const res = await axios.post(
         BASE_URL + "/login",
         { emailId, password },
-        { withCredentials: true } // when doing axios request, we can pass withCredentials: true to send cookies along with the request
+        { withCredentials: true }
       );
 
       dispatch(addUser(res.data)); // dispatching an action to update the state variable
-      return navigate("/"); // redirecting to the home page
+      return navigate("/");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
     }
@@ -96,7 +92,7 @@ const Login = () => {
               placeholder="Type here"
               value={emailId}
               className="bg-white input input-bordered w-full max-w-xs"
-              onChange={(e) => setEmailId(e.target.value)} // binding the state variable to the UI and updating the state variable
+              onChange={(e) => setEmailId(e.target.value)}
             />
           </label>
 
